@@ -17,9 +17,7 @@ def send_item_token(session):
         item: items_models.Item = None,
     ) -> tp.Tuple[items_models.Item, str]:
         if item is not None and user == item.user:
-            raise ValueError(
-                'The owner of the item cant be the same as the user passed in the function.'
-            )
+            raise ValueError('The owner of the item cant be the same as the user passed in the function.')
         elif item is None:
             item = ItemFactory.create(user=UserFactory.create())
 

@@ -25,9 +25,8 @@ test:	## Start tests
 
 lint:	## Code linting
 	$(BIN)flake8 --jobs 4 $(CODE)
-	$(BIN)black --skip-string-normalization --target-version py38 --check $(CODE) --exclude $(CODE)/migrations $(CODE)/tests
+	$(BIN)brunette --config=setup.cfg --check $(CODE) --exclude $(CODE)/migrations $(CODE)/tests
 
 pretty:  ## Auto-format code
 	$(BIN)isort $(CODE) tests
-	$(BIN)black --skip-string-normalization $(CODE) --exclude $(CODE)/migrations $(CODE)/tests
-	$(BIN)unify --in-place --recursive $(CODE)
+	$(BIN)brunette --config=setup.cfg $(CODE) --exclude $(CODE)/migrations $(CODE)/tests

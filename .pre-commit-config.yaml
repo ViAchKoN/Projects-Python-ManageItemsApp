@@ -15,10 +15,6 @@ repos:
         entry: isort
         language: system
         types: [ python ]
-        args: [
-            --line_length = 120,
-            --multi_line_output-complexity = 8,
-        ]
 
       - id: flake8
         name: flake8
@@ -27,14 +23,8 @@ repos:
         types: [ python ]
 
 
-      - id: black
-        name: black
-        entry: black
+      - id: brunetter
+        name: brunette
+        entry: brunette
         language: system
         types: [ python ]
-        args: [
-                --target-version=py38,
-                --skip-string-normalization,
-                --line-length=120,
-        ]
-        exclude: (^migrations/ | */tests/*)
