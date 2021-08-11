@@ -16,7 +16,9 @@ from application.items import models
 from application.items import schemas
 from application.users import models as user_models
 
-items_blp = Blueprint('items', 'items', url_prefix='/items', description='Operations on items')
+items_blp = Blueprint(
+    'items', 'items', url_prefix='/items', description='Operations on items'
+)
 
 
 @items_blp.route('/new')
@@ -55,7 +57,9 @@ class ItemDelete(MethodView):
         if user is None:
             raise errors.UserNotFound()
 
-        item = models.Item.query.filter_by(id=item_id, user_id=get_jwt_identity()).first()
+        item = models.Item.query.filter_by(
+            id=item_id, user_id=get_jwt_identity()
+        ).first()
         if item is None:
             raise errors.ItemNotFound()
 
@@ -77,14 +81,18 @@ class ItemSend(MethodView):
         item_id: str = send_item_data['item_id']
         recipient_username: str = send_item_data['recipient_username']
 
-        recipient_user = user_models.User.query.filter_by(username=recipient_username).first()
+        recipient_user = user_models.User.query.filter_by(
+            username=recipient_username
+        ).first()
         if recipient_user is None:
             raise errors.UserNotFound()
 
         if recipient_user.id == get_jwt_identity():
             raise errors.WrongRecipientUser()
 
-        item = models.Item.query.filter_by(id=item_id, user_id=get_jwt_identity()).first()
+        item = models.Item.query.filter_by(
+            id=item_id, user_id=get_jwt_identity()
+        ).first()
         if item is None:
             raise errors.ItemNotFound()
 
@@ -93,7 +101,11 @@ class ItemSend(MethodView):
             additional_claims={'item_id': item_id},
             expires_delta=datetime.timedelta(hours=2),
         )
-        responseObject = {'send_url': url_for('items.ItemGetRecipient', send_token=send_token, _external=True)[:-3]}
+        responseObject = {
+            'send_url': url_for(
+                'items.ItemGetRecipient', send_token=send_token, _external=True
+            )[:-3]
+        }
         return make_response(jsonify(responseObject), 200)
 
 
@@ -112,7 +124,11 @@ class ItemGetRecipient(MethodView):
         if user is None:
             raise errors.UserNotFound()
 
-        item = models.Item.query.filter_by(id=token_data['item_id']).with_for_update(of=models.Item).first()
+        item = (
+            models.Item.query.filter_by(id=token_data['item_id'])
+            .with_for_update(of=models.Item)
+            .first()
+        )
         if item is None:
             raise errors.ItemNotFound()
 

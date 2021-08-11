@@ -21,4 +21,6 @@ class User(db.Model):
         return pwd_context.verify(password, self.password_hash)
 
     def encode_auth_token(self, expiration: int = 600) -> str:
-        return create_access_token(identity=self.id, expires_delta=datetime.timedelta(seconds=expiration))
+        return create_access_token(
+            identity=self.id, expires_delta=datetime.timedelta(seconds=expiration)
+        )

@@ -9,7 +9,9 @@ from application.users import models
 
 from . import schemas
 
-users_blp = Blueprint('users', 'users', url_prefix='/users', description='Operations on users')
+users_blp = Blueprint(
+    'users', 'users', url_prefix='/users', description='Operations on users'
+)
 
 
 @users_blp.route('/registration')

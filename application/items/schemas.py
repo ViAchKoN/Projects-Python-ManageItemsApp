@@ -19,5 +19,9 @@ class ItemSchema(Schema):
 
 
 class SendItemSchema(Schema):
-    item_id = fields.Integer(description='ID of an element which will be sent', required=True)
-    recipient_username = fields.String(description='Name of a user to whom the item will be sent', required=True)
+    item_id = fields.Integer(
+        description='ID of an element which will be sent', required=True
+    )
+    recipient_username = fields.String(
+        description='Name of a user to whom the item will be sent', required=True
+    )
