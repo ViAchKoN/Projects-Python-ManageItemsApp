@@ -93,11 +93,11 @@ class ItemSend(MethodView):
             additional_claims={'item_id': item_id},
             expires_delta=datetime.timedelta(hours=2),
         )
-        responseObject = {'send_url': url_for('items.ItemGetRecipient', send_token=send_token, _external=True)[:-3]}
+        responseObject = {'send_url': url_for('items.ItemGetRecipient', send_token=send_token, _external=True)}
         return make_response(jsonify(responseObject), 200)
 
 
-@items_blp.route('/<send_token>}')
+@items_blp.route('/<send_token>')
 class ItemGetRecipient(MethodView):
     @items_blp.response(200, schemas.ItemSchema)
     @jwt_required()

@@ -2,11 +2,11 @@ import random
 
 import factory
 
-from application.tests import facker_mea
+from application.tests import faker_mea
 from application.tests.factories.utils import SQLAlchemyModelFactory
 from application.users import models
 
-facker_mea.reg_providers()
+faker_mea.reg_providers()
 
 
 class UserFactory(SQLAlchemyModelFactory):
