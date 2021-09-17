@@ -35,8 +35,8 @@ To delete created database and all associated data with this app, use the parame
 ```
   python3 init_db.py teardown or teardown_test
 ```
-Before starting the application it is required to apply migrations to create table inside the database.
-To do that `cd application` into folder and use:
+Before starting the application it is required to apply migrations to create tables inside the database.
+To do that use `cd application` to get inside the folder and then use:
 ```
   flask db upgrade
 ```
